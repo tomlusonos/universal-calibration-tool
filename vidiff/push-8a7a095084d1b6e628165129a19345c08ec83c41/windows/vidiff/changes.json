@@ -1,0 +1,15 @@
+{
+  "platform": "windows",
+  "files": [
+    {
+      "file": "ADB Execute.vi",
+      "type": "added",
+      "report": "ADB_Execute.vi/index.html"
+    },
+    {
+      "file": "ADB List Device.vi",
+      "type": "added",
+      "report": "ADB_List_Device.vi/index.html"
+    }
+  ]
+}
