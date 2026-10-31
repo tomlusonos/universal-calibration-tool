@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "sha": "8a7a095084d1b6e628165129a19345c08ec83c41",
+    "short": "8a7a095",
+    "platform": "windows",
+    "repo": "tomlusonos/universal-calibration-tool",
+    "pages_url": "https://tomlusonos.github.io/universal-calibration-tool",
+    "pages_base": "../..",
+    "commit": {
+      "message": "upload vi for test",
+      "author": "tom.lu",
+      "date": "2026-10-31T22:03:22+08:00"
+    },
+    "generated_utc": "2026-10-31 14:20 UTC",
+    "analysis_date": "Saturday, October 31, 2026 2:19:57 PM",
+    "duration": "00:01:20.56"
+  },
+  "summary": {
+    "vis_analyzed": 20,
+    "tests_run": 2080,
+    "passed": 1935,
+    "failed": 145,
+    "skipped": 0,
+    "findings": 23,
+    "vis_with_findings": 2
+  },
+  "errors": {
+    "vi_not_loadable": 0,
+    "test_not_loadable": 0,
+    "test_not_runnable": 0,
+    "test_error_out": 0
+  },
+  "rule_counts": [
+    {
+      "test": "Error Cluster Wired",
+      "severity": "correctness",
+      "count": 3,
+      "vi_count": 2
+    },
+    {
+      "test": "Auto Error Handling Enabled",
+      "severity": "correctness",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Comment Usage",
+      "severity": "documentation",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Control Alignment",
+      "severity": "style",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Enabled Debugging",
+      "severity": "performance",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Panel Size and Position",
+      "severity": "style",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Separate Compiled Code Setting",
+      "severity": "style",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Tunnel Position",
+      "severity": "style",
+      "count": 2,
+      "vi_count": 1
+    },
+    {
+      "test": "VI Documentation",
+      "severity": "documentation",
+      "count": 2,
+      "vi_count": 2
+    },
+    {
+      "test": "Wire Bends",
+      "severity": "style",
+      "count": 2,
+      "vi_count": 1
+    },
+    {
+      "test": "Backwards Wires",
+      "severity": "style",
+      "count": 1,
+      "vi_count": 1
+    },
+    {
+      "test": "Diagram Size",
+      "severity": "style",
+      "count": 1,
+      "vi_count": 1
+    }
+  ]
+}
