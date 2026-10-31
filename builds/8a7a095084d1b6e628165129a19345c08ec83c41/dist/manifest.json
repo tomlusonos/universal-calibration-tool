@@ -1,0 +1,12 @@
+{
+    "repo":  "tomlusonos/universal-calibration-tool",
+    "sha":  "8a7a095084d1b6e628165129a19345c08ec83c41",
+    "ref":  "refs/heads/main",
+    "platform":  "windows",
+    "arch":  "AMD64",
+    "labview_version":  "LabVIEW 2026",
+    "built_at":  "2026-10-31T14:19:01Z",
+    "specs":  [
+
+              ]
+}
