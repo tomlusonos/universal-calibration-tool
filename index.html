@@ -241,7 +241,7 @@
     // the install/Configure iframe and its in-flight work. When a refresh comes due
     // with a dialog open, keep re-checking and reload only once it is closed.
     (function () {
-      var REFRESH_MS = 900 * 1000;
+      var REFRESH_MS = 60 * 1000;
       if (!(REFRESH_MS > 0)) return;
       function tick() {
         if (lvciModalOpen()) { setTimeout(tick, 5000); return; }
@@ -281,7 +281,7 @@
   <script>
   (function(){
     var RT = {"masscompile": {"label": "Mass Compile", "platforms": {"windows": {"wf": "masscompile-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}, "vi-analyzer": {"label": "VI Analyzer", "platforms": {"windows": {"wf": "run-vi-analyzer-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}, "vidiff": {"label": "VIDiff", "platforms": {"windows": {"wf": "vidiff-windows-container.yml", "inputs": {"head_sha": "{sha}", "base_sha": "{parent}"}}}}, "snapshots": {"label": "VI Snapshots", "platforms": {"all": {"wf": "vi-snapshots.yml", "inputs": {"mode": "backfill"}}}}, "snapshots2": {"label": "VI Browser 2.0 Snapshots", "platforms": {"windows": {"wf": "vi-snapshots-json-windows.yml", "inputs": {"target_sha": "{sha}"}}}}, "unit-tests": {"label": "Unit Tests", "platforms": {"windows": {"wf": "unit-tests-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}, "builds": {"label": "Builds", "platforms": {"windows": {"wf": "build-binaries-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}};
-    var RT_TIMING = {"masscompile": {"windows": {"total": null, "work": null}}, "vi-analyzer": {"windows": {"total": null, "work": null}}, "vidiff": {"windows": {"total": null, "work": null}}, "snapshots2": {"windows": {"total": null, "work": null}}, "unit-tests": {"windows": {"total": null, "work": null}}, "builds": {"windows": {"total": null, "work": null}}};
+    var RT_TIMING = {"masscompile": {"windows": {"total": 875.0, "work": null}}, "vi-analyzer": {"windows": {"total": null, "work": null}}, "vidiff": {"windows": {"total": null, "work": null}}, "snapshots2": {"windows": {"total": null, "work": null}}, "unit-tests": {"windows": {"total": 772.0, "work": null}}, "builds": {"windows": {"total": null, "work": null}}};
     var REPO = "tomlusonos/universal-calibration-tool";
     var BRANCH = "main";
     var TOK_KEY = "lvci_dispatch_token";
@@ -1227,8 +1227,8 @@
     // activities to queue. Reuses dispatchCells (oldest-first, snapshots as one
     // backfill) + the same token and optimistic-queued bridge as every other
     // dispatch on the dashboard.
-    var HIST = [];                        // [{sha, short, msg}] newest-first (project revisions)
-    var RAN = {};                     // {cap:1} caps with a result/active run somewhere in history
+    var HIST = [{"sha": "8a7a095084d1b6e628165129a19345c08ec83c41", "short": "8a7a095", "msg": "upload vi for test", "dep_only": false, "snapshots2": {"windows": {"have": 0, "total": 2}, "linux": {"have": 0, "total": 2}}}];                        // [{sha, short, msg}] newest-first (project revisions)
+    var RAN = {"builds": 1, "masscompile": 1, "snapshots": 1, "unit-tests": 1, "vi-analyzer": 1, "vidiff": 1};                     // {cap:1} caps with a result/active run somewhere in history
     var CAP_META = {                            // label + sub for each known capability
       'snapshots':   ['VI Snapshots', 'Renders every changed VI (classic HTML snapshots)'],
       'snapshots2':  ['VI Browser 2.0 Snapshots', 'Renders position-aware snapshots for the VI Browser 2.0 view'],
@@ -1834,7 +1834,7 @@
   <script>
   (function(){
     var RT = {"masscompile": {"label": "Mass Compile", "platforms": {"windows": {"wf": "masscompile-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}, "vi-analyzer": {"label": "VI Analyzer", "platforms": {"windows": {"wf": "run-vi-analyzer-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}, "vidiff": {"label": "VIDiff", "platforms": {"windows": {"wf": "vidiff-windows-container.yml", "inputs": {"head_sha": "{sha}", "base_sha": "{parent}"}}}}, "snapshots": {"label": "VI Snapshots", "platforms": {"all": {"wf": "vi-snapshots.yml", "inputs": {"mode": "backfill"}}}}, "snapshots2": {"label": "VI Browser 2.0 Snapshots", "platforms": {"windows": {"wf": "vi-snapshots-json-windows.yml", "inputs": {"target_sha": "{sha}"}}}}, "unit-tests": {"label": "Unit Tests", "platforms": {"windows": {"wf": "unit-tests-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}, "builds": {"label": "Builds", "platforms": {"windows": {"wf": "build-binaries-windows-container.yml", "inputs": {"commit_sha": "{sha}"}}}}};
-    var HIST = [];
+    var HIST = [{"sha": "8a7a095084d1b6e628165129a19345c08ec83c41", "short": "8a7a095", "msg": "upload vi for test", "dep_only": false, "snapshots2": {"windows": {"have": 0, "total": 2}, "linux": {"have": 0, "total": 2}}}];
     var REPO = "tomlusonos/universal-calibration-tool";
     var BRANCH = "main";
     var TOK_KEY = "lvci_dispatch_token";
@@ -2014,7 +2014,7 @@
   </script>
   <main class="lvci-main">
   <h1>CI Dashboard — universal-calibration-tool</h1>
-  <div class="sub">Last updated: 2026-10-31 10:45 UTC &nbsp;|&nbsp; Auto-refreshes every 15 min</div>
+  <div class="sub">Last updated: 2026-10-31 14:18 UTC &nbsp;|&nbsp; Live — refreshing every 60 s while CI runs</div>
   <div class="nav">
     <a href="https://github.com/tomlusonos/universal-calibration-tool">GitHub</a>
     <a href="https://github.com/tomlusonos/universal-calibration-tool/actions">Actions</a>
@@ -2059,6 +2059,25 @@
       </tr>
     </thead>
     <tbody>
+    <tr data-project="true" data-deponly="false">
+      <td class="cidash-rev">
+        <div class="cidash-rev-wrap">
+          <span class="cidash-avatar" style="background:hsl(247,42%,45%)" title="tom.lu" aria-hidden="true">T</span>
+          <div class="cidash-rev-body">
+            <div class="cidash-rev-line1"><a href="https://tomlusonos.github.io/universal-calibration-tool/vi-snapshots/index.html?sha=8a7a095084d1b6e628165129a19345c08ec83c41" class="cidash-rev-msg" title="upload vi for test">upload vi for test</a></div>
+            <div class="cidash-rev-meta"><a href="https://tomlusonos.github.io/universal-calibration-tool/vi-snapshots/index.html?sha=8a7a095084d1b6e628165129a19345c08ec83c41" class="cidash-rev-sha" title="Browse this revision's VIs in the VI Browser">8a7a095</a><span class="cidash-rev-dot">&middot;</span>tom.lu<span class="cidash-rev-dot">&middot;</span>2026-10-31</div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center" class="cidash-cap-cell" data-cap="masscompile" data-sha="8a7a095084d1b6e628165129a19345c08ec83c41" data-parent="fdd9d197e576e72c78b3ceb5ab28d00f8e400bd9" data-short="8a7a095" data-ts="2026-10-31T14:18:02Z"><span class="cidash-chip cc-pass"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L1.22 9.28a.75.75 0 1 1 1.06-1.06L6 11.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg><a href="https://tomlusonos.github.io/universal-calibration-tool/report/index.html?type=masscompile-report&sha=8a7a095084d1b6e628165129a19345c08ec83c41&short=8a7a095&src=..%2Fmasscompile%2F8a7a095084d1b6e628165129a19345c08ec83c41%2Findex.html&title=Mass%20Compile%20%C2%B7%208a7a095" style="color:inherit">compile</a></span></td>
+      <td style="text-align:center" class="cidash-active-cell" data-cap="vi-analyzer" data-sha="8a7a095084d1b6e628165129a19345c08ec83c41" data-parent="fdd9d197e576e72c78b3ceb5ab28d00f8e400bd9" data-short="8a7a095" data-active="true"><span class="run-badge" title="Running — click to view progress"><a href="https://github.com/tomlusonos/universal-calibration-tool/actions/runs/41208358985" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:5px"><span class="run-spin"></span>analyze</a></span></td>
+      <td style="text-align:center" class="cidash-active-cell" data-cap="vidiff" data-sha="8a7a095084d1b6e628165129a19345c08ec83c41" data-parent="fdd9d197e576e72c78b3ceb5ab28d00f8e400bd9" data-short="8a7a095" data-active="true"><span class="run-badge" title="Running — click to view progress"><a href="https://github.com/tomlusonos/universal-calibration-tool/actions/runs/41208358997" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:5px"><span class="run-spin"></span>diff</a></span></td>
+      <td style="text-align:center" class="cidash-active-cell" data-cap="snapshots" data-sha="8a7a095084d1b6e628165129a19345c08ec83c41" data-parent="fdd9d197e576e72c78b3ceb5ab28d00f8e400bd9" data-short="8a7a095" data-active="true"><span class="run-badge" title="Running — click to view progress"><a href="https://github.com/tomlusonos/universal-calibration-tool/actions/runs/41208358971" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:5px"><span class="run-spin"></span>snapshots</a></span></td>
+      <td style="text-align:center" class="cidash-cap-cell" data-cap="unit-tests" data-sha="8a7a095084d1b6e628165129a19345c08ec83c41" data-parent="fdd9d197e576e72c78b3ceb5ab28d00f8e400bd9" data-short="8a7a095" data-ts="2026-10-31T14:16:19Z"><span class="cidash-chip cc-pass" title="No unit tests found; 0% failed."><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L1.22 9.28a.75.75 0 1 1 1.06-1.06L6 11.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg><a href="https://tomlusonos.github.io/universal-calibration-tool/report/index.html?type=unit-tests-report&sha=8a7a095084d1b6e628165129a19345c08ec83c41&short=8a7a095&src=..%2Funit-tests%2F8a7a095084d1b6e628165129a19345c08ec83c41%2Findex.html&title=Unit%20Tests%20%C2%B7%208a7a095" style="color:inherit">0% failed</a></span></td>
+      <td style="text-align:center;color:var(--fg-muted);font-size:.75em">—</td>
+      <td style="text-align:center" class="cidash-active-cell" data-cap="builds" data-sha="8a7a095084d1b6e628165129a19345c08ec83c41" data-parent="fdd9d197e576e72c78b3ceb5ab28d00f8e400bd9" data-short="8a7a095" data-active="true"><span class="run-badge" title="Running — click to view progress"><a href="https://github.com/tomlusonos/universal-calibration-tool/actions/runs/41208358959" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:5px"><span class="run-spin"></span>build</a></span></td>
+    </tr>
+
     <tr data-project="false" data-deponly="false">
       <td class="cidash-rev">
         <div class="cidash-rev-wrap">
