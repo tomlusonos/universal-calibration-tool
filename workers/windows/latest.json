@@ -1,7 +1,7 @@
 {
-  "version": "win-982773c5fc86",
+  "version": "win-fca0b6f8201f",
   "platform": "windows",
-  "manifest_url": "https://tomlusonos.github.io/universal-calibration-tool/workers/windows/win-982773c5fc86/manifest.html",
-  "build_date": "2026-10-30T13:37:51Z",
-  "git_sha": "23d99d141443004ee1469843a6e8b2cb39684423"
+  "manifest_url": "https://tomlusonos.github.io/universal-calibration-tool/workers/windows/win-fca0b6f8201f/manifest.html",
+  "build_date": "2026-11-01T12:36:30Z",
+  "git_sha": "8a7a095084d1b6e628165129a19345c08ec83c41"
 }
